@@ -8,12 +8,35 @@ export class PdfGeneratorController {
 
    @Get('generate/:month')
   async generatePdf(@Param('month') month: string, @Res() res: Response) {
+    console.log("entro al metodo");
     const pdfBuffer = await this.pdfGeneratorService.generatePdf(month);
-
+    
     res.set({
       'Content-Type': 'application/pdf',
       'Content-Disposition': 'attachment; filename="document.pdf"',
     });
     res.send(pdfBuffer);
+  }
+  
+  @Get('certificado')
+  async generarCertificado(@Res() res: Response) {
+    const nombre = (res.req.query.nombre as string) || '';
+    const curso = (res.req.query.curso as string) || '';
+    const fecha = (res.req.query.fecha as string) || '';
+    const firmaInstructor = (res.req.query.firmaInstructor as string) || '';
+    const firmaDirector = (res.req.query.firmaDirector as string) || '';
+    const pdfBuffer = await this.pdfGeneratorService.generarCertificado(
+      nombre,
+      curso,
+      fecha,
+      firmaInstructor,
+      firmaDirector,
+    );
+    res.set({
+      'Content-Type': 'application/pdf',
+      'Content-Disposition': 'inline; filename="certificado.pdf"',
+      'Content-Length': pdfBuffer.length,
+    });
+    res.end(pdfBuffer);
   }
 }
