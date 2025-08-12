@@ -10,7 +10,7 @@ export class PdfGeneratorService {
   async generatePdf(month: string): Promise<Buffer> {
      if (!this.browser) {
       this.browser = await puppeteer.launch({
-        headless: 'shell',
+        headless: true,
       });
     }
     const page = await this.browser.newPage();
@@ -44,4 +44,33 @@ export class PdfGeneratorService {
     await this.browser.close();
     return pdfBuffer;
   }
+
+    async generarCertificado(
+      nombre: string,
+      curso: string,
+      fecha: string,
+      firmaInstructor?: string,
+      firmaDirector?: string
+    ): Promise<Buffer> {
+    const fs = await import('fs');
+    const path = await import('path');
+    const templatePath = path.join(process.cwd(), 'src', 'pdf-generator', 'templates', 'certificado.html');
+    let html = fs.readFileSync(templatePath, 'utf8');
+
+        html = html
+          .replace('{{nombre}}', nombre)
+          .replace('{{curso}}', curso)
+          .replace('{{fecha}}', fecha)
+          .replace('{{firmaInstructor}}', firmaInstructor || '')
+          .replace('{{firmaDirector}}', firmaDirector || '');
+
+      const browser = await puppeteer.launch({ headless: true });
+      const page = await browser.newPage();
+    await page.setContent(html, { waitUntil: 'networkidle0', timeout: 60000 });
+    const pdfUint8Array = await page.pdf({ format: 'A4' });
+
+
+    await browser.close();
+    return Buffer.from(pdfUint8Array);
+    }
 }

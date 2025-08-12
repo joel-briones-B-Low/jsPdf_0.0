@@ -33,7 +33,7 @@ return`
     </style>
 </head>
 <body>
-    <h1>Report Summary of the month of ${month}</h1>
+    <h1>Report Summary of the PEPE LOCO of ${month}</h1>
     <table>
         <tr>
             <th>Name</th>

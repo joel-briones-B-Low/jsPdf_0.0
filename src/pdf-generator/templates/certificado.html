@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Certificado</title>
+  <style>
+    body {
+      background: #f3f4f6;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Georgia', serif;
+    }
+    .cert-container {
+      background: #fff;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+      border-radius: 0.5rem;
+      padding: 3rem;
+      max-width: 900px;
+      width: 100%;
+      border: 4px solid #d4af37; /* dorado */
+      position: relative;
+      background-image: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+    }
+    .cert-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .cert-logo {
+      border-radius: 10px;
+      width: 100px;
+    }
+    .cert-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #d4af37;
+      text-align: center;
+      margin: 1rem 0 0.5rem 0;
+      text-transform: uppercase;
+    }
+    .cert-subtitle {
+      text-align: center;
+      color: #6b7280;
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+      letter-spacing: 2px;
+    }
+    .cert-name {
+      font-size: 2.2rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 1rem;
+      font-family: 'Brush Script MT', cursive;
+      color: #1f2937;
+    }
+    .cert-course {
+      text-align: center;
+      color: #374151;
+      margin-bottom: 2rem;
+    }
+    .cert-course span {
+      font-weight: bold;
+      color: #1d4ed8;
+    }
+    .cert-signatures {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3rem;
+    }
+    .cert-sign {
+      text-align: center;
+    }
+    .cert-sign hr {
+      border: none;
+      border-top: 1px solid #374151;
+      width: 200px;
+      margin: 0.5rem auto;
+    }
+    .cert-sign p {
+      font-size: 0.9rem;
+      color: #374151;
+      margin-top: 0.3rem;
+    }
+    .badge {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      background: #1d4ed8;
+      color: white;
+      padding: 1rem;
+      border-radius: 50%;
+      font-weight: bold;
+      border: 4px solid #d4af37;
+      text-align: center;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      line-height: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="cert-container">
+    <div class="cert-header">
+      <!-- Aquí reemplaza BASE64_LOGO con tu imagen en Base64 -->
+      <img class="cert-logo" src="data:image/png;base64,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" alt="Logo Empresa">
+    </div>
+
+    <h1 class="cert-title">Certificado de Finalización</h1>
+    <p class="cert-subtitle">Este certificado es otorgado a</p>
+    <h2 class="cert-name">{{nombre}}</h2>
+    <p class="cert-course">
+      Por completar el curso <span>{{curso}}</span> el día {{fecha}}.
+    </p>
+
+    <div class="cert-signatures">
+      <div class="cert-sign">
+        <hr>
+        <p>Instructor (firma a mano)</p>
+      </div>
+      <div class="cert-sign">
+        <hr>
+        <p>Director (firma a mano)</p>
+      </div>
+    </div>
+
+    <div class="badge">
+      BEST<br>2025<br>AWARD
+    </div>
+  </div>
+</body>
+</html>
